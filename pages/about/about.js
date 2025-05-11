@@ -31,7 +31,7 @@ async function getDevelopersData() {
 
 async function loadlines() {
     async function loadData() {
-        const url = "https://api.github.com/repos/ADHAM-KHAIRY/chaygpt.github.io/stats/contributors";
+        const url = "https://api.github.com/repos/chaygpt/chaygpt.github.io/stats/contributors";
         const res = await fetch(url);  
         if (res.status === 202) {
             console.log("GitHub is generating the stats... retrying in 3s");
