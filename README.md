@@ -7,7 +7,7 @@
 Welcome to **ChayGPT**, the best tea shop in Helwan and the whole world. 🌍☕  
 Stay tuned for the best tea experience ever!  
 
-📌 **Website:** [ChayGPT Website](https://adham-khairy.github.io/chaygpt.github.io/)  
+📌 **Website:** [ChayGPT Website](https://chaygpt.github.io/)  
 
 ---
 ## 🏷️ Naming Conventions 🏷️  
