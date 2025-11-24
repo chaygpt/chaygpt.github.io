@@ -70,13 +70,7 @@ function displayProduct(currentProduct, allProducts, container) {
             (product.category === currentProduct.category )).slice(0, 3);
     
     const formattedPrice = currentProduct.price.toFixed(2);
-
-    const sizeOptions = currentProduct.options ? currentProduct.options.filter(option => 
-        ['Small', 'Medium', 'Large'].includes(option)) : [];
-    
-    const milkOptions = currentProduct.options ? currentProduct.options.filter(option => 
-        ['Oat milk', 'Almond milk', 'Soy milk'].includes(option)) : [];
-    
+ 
     // Create HTML content
     product.innerHTML = `
         <main class="product-area">
@@ -99,26 +93,7 @@ function displayProduct(currentProduct, allProducts, container) {
             </div>
         </main>
         <div class="options-area">
-            ${sizeOptions.length > 0 ? `
-                <div class="size">
-                    <div class="size-title">Size</div>
-                    ${sizeOptions.map(size => `<div class="size-option" data-size="${size}">${size}</div>`).join('')}
-                </div>
-                <div class="size-info">Selected size: <span id="selected-size">${
-                    sizeOptions.includes('Medium') ? 'Medium' : sizeOptions[0]
-                }</span></div>
-            ` : ''}
-            
-            ${milkOptions.length > 0 ? `
-                <div class="milk-options">
-                    <div class="milk-title">Milk Options</div>
-                    <select id="milk-choice">
-                        <option value="Regular">Regular</option>
-                        ${milkOptions.map(milk => `<option value="${milk}">${milk}</option>`).join('')}
-                    </select>
-                </div>
-            ` : ''}
-            
+    
             <button class="add-to-cart">Add to Cart - ${formattedPrice}EGP</button>
         </div>
         <div class="product-info">
@@ -200,43 +175,12 @@ function addToCart(item) {
 }
 function initializeProductInteractions(currentProduct) {
     
-    const sizeOptions = document.querySelectorAll('.size-option');
-    const selectedSizeShown = document.getElementById('selected-size');
-    
-    if (sizeOptions.length > 0 && selectedSizeShown) {
-        
-        const defaultSize = currentProduct.options && currentProduct.options.find(opt => opt === 'Medium' ) || 'Medium';
-        
-        let selectedSize = defaultSize;
-        selectedSizeShown.textContent = selectedSize;
-        
-        sizeOptions.forEach(option => {
-            if (option.getAttribute('data-size') === selectedSize) {
-                option.classList.add('selected');
-            }
-            
-            option.addEventListener('click', function() {
-                // remove selected
-                sizeOptions.forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                
-                // add selected
-                this.classList.add('selected');
-                
-                selectedSize = this.getAttribute('data-size');
-                selectedSizeShown.textContent = selectedSize;
-            });
-        });
-    }
-    
 
     const addToCartButton = document.querySelector('.add-to-cart');
     if (addToCartButton) {
         addToCartButton.addEventListener('click', function() {
             
-            const selectedSizeElement = document.getElementById('selected-size');
-            const selectedSize = selectedSizeElement ? selectedSizeElement.textContent : 'Medium';
+
             
             let milkOption = "Regular";
             const milkSelector = document.getElementById('milk-choice');
@@ -247,14 +191,12 @@ function initializeProductInteractions(currentProduct) {
                 id: currentProduct.id,
                 name: currentProduct.name,
                 price: currentProduct.price,
-                size: selectedSize,
-                milkOption: milkOption,
                 quantity: 1,
                 image: currentProduct.image
             };
             
             addToCart(cartItem);
-            alert(`Added ${currentProduct.name} (Size: ${selectedSize}${milkOption !== "Regular" ? ', Milk: ' + milkOption : ''}) to your cart!`);
+            alert(`Added ${currentProduct.name}}) to your cart!`);
         });
     }
     
