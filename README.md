@@ -1,12 +1,12 @@
 # 🏡 ChayGPT - The Best Tea Shop in Helwan! 
 # وَلَقَدْ آتَيْنَا دَاوُودَ وَسُلَيْمَانَ عِلْمًا ۖ وَقَالَا الْحَمْدُ لِلَّهِ الَّذِي فَضَّلَنَا عَلَىٰ كَثِيرٍ مِّنْ عِبَادِهِ الْمُؤْمِنِينَ (15)
 # من قال ( الحمد لله الذي عافاني مما ابتلاك به وفضلني على كثير ممن خلق تفضيلا، لم يصبه ذلك البلاء)
-#NIGGA
-##class system: mohamed saber
-##activity diagram: ammar yasser
-##sequence diagram: ziad mohamed
-##dataflow: adham khairy
-##use case system: Abdo samy & Hamza waleed
+# Tasks
+## class system: mohamed saber
+## activity diagram: ammar yasser
+## sequence diagram: ziad mohamed
+## dataflow: adham khairy
+## use case system: Abdo samy & Hamza waleed
 
 Welcome to **ChayGPT**, the best tea shop in Helwan and the whole world. 🌍☕  
 Stay tuned for the best tea experience ever!  
