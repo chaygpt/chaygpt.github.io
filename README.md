@@ -29,10 +29,6 @@ chaygpt.github.io
 │   └── products/
 │       └── *.jpg (all products images)
 ├── pages/
-│   ├── about/
-│   │   ├── about.html / about.css / about.js / data.json
-│   ├── checkout/
-│   │   ├── checkout.html / checkout.css / checkout.js
 │   ├── contact/
 │   │   ├── contact.html / contact.css
 │   ├── join-us/
