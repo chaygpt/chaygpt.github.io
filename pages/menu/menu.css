@@ -267,7 +267,7 @@ nav {
 }
 
 /* Footer */
-footer {
+.footer-section {
     background-color: var(--primary-color);
     color: var(--secondary-color);
     padding: 3rem 5%;
@@ -340,4 +340,5 @@ footer {
     padding-top: 1rem;
     border-top: 1px solid rgba(230, 201, 168, 0.3);
     font-size: 0.9rem;
+}
 }
