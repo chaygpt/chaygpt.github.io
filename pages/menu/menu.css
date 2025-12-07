@@ -267,10 +267,11 @@ nav {
 }
 
 /* Footer */
-.footer-section {
+footer {
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    padding: 3rem 5%;
+    padding: 8rem 6%;
+    
 }
 
 .footer-container {
