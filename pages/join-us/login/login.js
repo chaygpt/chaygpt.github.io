@@ -28,12 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (user) {
 
-            sessionStorage.setItem('loggedInUser', JSON.stringify({
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                loginTime: new Date().toISOString()
-            }));
+            sessionStorage.setItem('loggedInUser', true);
 
             alert(`Welcome back, ${user.firstName}!`);
             window.location.href = '../../profile/profile.html';
