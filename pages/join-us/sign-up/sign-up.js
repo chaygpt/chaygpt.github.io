@@ -1,7 +1,3 @@
-window.onload = function() {
-  const firstNameInput = document.getElementById("first-name");
-  firstNameInput.focus();
-};
 
 function validPassword(password) {
   const hasNumber = /[0-9]/.test(password);
@@ -10,12 +6,19 @@ function validPassword(password) {
   return hasNumber && hasUpperCase;
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
+
+  const firstNameInput = document.getElementById("first-name");
+  if (firstNameInput) {
+    firstNameInput.focus();
+  }
+  
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirm-password');
   const passwordErrorMessage = document.getElementById('error1-message');
   const confirmErrorMessage = document.getElementById('error2-message');
-  const form = document.getElementById('signup-form');
+  const form = document.querySelector('.auth-form');
   
   let isPasswordValid = false;
   let doPasswordsMatch = false;
@@ -61,10 +64,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   
+  
   if (form) {
       form.addEventListener('submit', function(event) {
-          event.preventDefault();
+          event.preventDefault(); 
           
+          console.log('Form submitted!'); 
+          
+        
           if (!(isPasswordValid && doPasswordsMatch)) {
               if (!isPasswordValid) {
                   passwordErrorMessage.textContent = 'Please enter a valid password with numbers and uppercase letters.';
@@ -78,12 +85,32 @@ document.addEventListener('DOMContentLoaded', function() {
               return;
           }
 
-          const firstName = document.getElementById('first-name').value;
-          const lastName = document.getElementById('last-name').value;
-          const email = document.getElementById('email').value;
+         
+          const firstName = document.getElementById('first-name').value.trim();
+          const lastName = document.getElementById('last-name').value.trim();
+          const email = document.getElementById('email').value.trim();
           const password = passwordInput.value;
+          const termsAccepted = document.getElementById('terms').checked;
 
-          const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        
+          if (!termsAccepted) {
+              alert('Please accept the Terms of Service and Privacy Policy');
+              return;
+          }
+
+          console.log('Getting existing users...'); 
+         
+          let existingUsers = [];
+          try {
+              const storedUsers = localStorage.getItem('users');
+              existingUsers = storedUsers ? JSON.parse(storedUsers) : [];
+          } catch (e) {
+              console.error('Error reading from localStorage:', e);
+              existingUsers = [];
+          }
+
+          console.log('Existing users:', existingUsers); 
+
           const userExists = existingUsers.some(user => user.email === email);
 
           if (userExists) {
@@ -99,11 +126,34 @@ document.addEventListener('DOMContentLoaded', function() {
               createdAt: new Date().toISOString()
           };
 
-          existingUsers.push(newUser);
-          localStorage.setItem('users', JSON.stringify(existingUsers));
+          console.log('New user:', newUser); 
 
-          alert('Account created successfully! Redirecting to login...');
-          window.location.href = '../login/login.html';
+         
+          existingUsers.push(newUser);
+
+         
+          try {
+              localStorage.setItem('users', JSON.stringify(existingUsers));
+              console.log('Saved to localStorage successfully!'); 
+              
+       
+              const verification = localStorage.getItem('users');
+              console.log('Verification:', verification); 
+              
+           
+              alert('Account created successfully! Redirecting to login...');
+
+              
+              setTimeout(() => {
+                  window.location.href = '../login/login.html';
+              }, 500);
+              
+          } catch (e) {
+              console.error('Error saving to localStorage:', e);
+              alert('Error creating account. Please try again.');
+          }
       });
+  } else {
+      console.error('Form not found!');
   }
 });
