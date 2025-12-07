@@ -1,7 +1,8 @@
 window.onload = function() {
   const firstNameInput = document.getElementById("first-name");
-      firstNameInput.focus();
+  firstNameInput.focus();
 };
+
 function validPassword(password) {
   const hasNumber = /[0-9]/.test(password);
   const hasUpperCase = /[A-Z]/.test(password);
@@ -12,10 +13,9 @@ function validPassword(password) {
 document.addEventListener('DOMContentLoaded', function() {
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirm-password');
-  const submitButton = document.getElementById('submit');
   const passwordErrorMessage = document.getElementById('error1-message');
   const confirmErrorMessage = document.getElementById('error2-message');
-  const form = document.querySelector('form');
+  const form = document.getElementById('signup-form');
   
   let isPasswordValid = false;
   let doPasswordsMatch = false;
@@ -34,12 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       checkPasswordsMatch();
-      updateSubmitButton();
   });
   
   confirmPasswordInput.addEventListener('input', function() {
       checkPasswordsMatch();
-      updateSubmitButton();
   });
   
   function checkPasswordsMatch() {
@@ -63,15 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   
-  function updateSubmitButton() {
-      submitButton.disabled = !(isPasswordValid && doPasswordsMatch);
-  }
-  
   if (form) {
       form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          
           if (!(isPasswordValid && doPasswordsMatch)) {
-              event.preventDefault(); 
-              
               if (!isPasswordValid) {
                   passwordErrorMessage.textContent = 'Please enter a valid password with numbers and uppercase letters.';
                   passwordErrorMessage.style.color = 'red';
@@ -81,7 +75,35 @@ document.addEventListener('DOMContentLoaded', function() {
                   confirmErrorMessage.textContent = 'Password fields must match!';
                   confirmErrorMessage.style.color = 'red';
               }
+              return;
           }
+
+          const firstName = document.getElementById('first-name').value;
+          const lastName = document.getElementById('last-name').value;
+          const email = document.getElementById('email').value;
+          const password = passwordInput.value;
+
+          const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+          const userExists = existingUsers.some(user => user.email === email);
+
+          if (userExists) {
+              alert('An account with this email already exists!');
+              return;
+          }
+
+          const newUser = {
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+              createdAt: new Date().toISOString()
+          };
+
+          existingUsers.push(newUser);
+          localStorage.setItem('users', JSON.stringify(existingUsers));
+
+          alert('Account created successfully! Redirecting to login...');
+          window.location.href = '../login/login.html';
       });
   }
 });
