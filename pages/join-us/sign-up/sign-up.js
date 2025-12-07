@@ -6,9 +6,7 @@ function validPassword(password) {
   return hasNumber && hasUpperCase;
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
-
   const firstNameInput = document.getElementById("first-name");
   if (firstNameInput) {
     firstNameInput.focus();
@@ -64,14 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   
-  
   if (form) {
       form.addEventListener('submit', function(event) {
-          event.preventDefault(); 
+          event.preventDefault();
           
-          console.log('Form submitted!'); 
-          
-        
           if (!(isPasswordValid && doPasswordsMatch)) {
               if (!isPasswordValid) {
                   passwordErrorMessage.textContent = 'Please enter a valid password with numbers and uppercase letters.';
@@ -85,21 +79,17 @@ document.addEventListener('DOMContentLoaded', function() {
               return;
           }
 
-         
           const firstName = document.getElementById('first-name').value.trim();
           const lastName = document.getElementById('last-name').value.trim();
           const email = document.getElementById('email').value.trim();
           const password = passwordInput.value;
           const termsAccepted = document.getElementById('terms').checked;
 
-        
           if (!termsAccepted) {
               alert('Please accept the Terms of Service and Privacy Policy');
               return;
           }
 
-          console.log('Getting existing users...'); 
-         
           let existingUsers = [];
           try {
               const storedUsers = localStorage.getItem('users');
@@ -108,8 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
               console.error('Error reading from localStorage:', e);
               existingUsers = [];
           }
-
-          console.log('Existing users:', existingUsers); 
 
           const userExists = existingUsers.some(user => user.email === email);
 
@@ -126,24 +114,13 @@ document.addEventListener('DOMContentLoaded', function() {
               createdAt: new Date().toISOString()
           };
 
-          console.log('New user:', newUser); 
-
-         
           existingUsers.push(newUser);
 
-         
           try {
               localStorage.setItem('users', JSON.stringify(existingUsers));
-              console.log('Saved to localStorage successfully!'); 
               
-       
-              const verification = localStorage.getItem('users');
-              console.log('Verification:', verification); 
-              
-           
               alert('Account created successfully! Redirecting to login...');
 
-              
               setTimeout(() => {
                   window.location.href = '../login/login.html';
               }, 500);
@@ -153,7 +130,5 @@ document.addEventListener('DOMContentLoaded', function() {
               alert('Error creating account. Please try again.');
           }
       });
-  } else {
-      console.error('Form not found!');
   }
 });
