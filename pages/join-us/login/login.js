@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (user) {
 
-            sessionStorage.setItem('loggedInUser', true);
+            sessionStorage.setItem('loggedInUser', 'nigga');
 
             alert(`Welcome back, ${user.firstName}!`);
             window.location.href = '../../profile/profile.html';
